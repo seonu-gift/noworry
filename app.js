@@ -84,6 +84,62 @@ function normalizeText(text) {
     .trim()
     .toLowerCase();
 }
+function levenshtein(a, b) {
+  const matrix = [];
+
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j] + 1
+        );
+      }
+    }
+  }
+
+  return matrix[b.length][a.length];
+}
+
+function findClosestMajor(inputMajor) {
+  const majors = DATA.flatMap(school => school.majors.map(major => major.name));
+  const normalizedInput = normalizeText(inputMajor);
+
+  let bestMatch = null;
+  let bestScore = Infinity;
+
+  majors.forEach(name => {
+    const normalizedName = normalizeText(name);
+
+    let score = levenshtein(normalizedName, normalizedInput);
+
+    if (normalizedName.includes(normalizedInput) || normalizedInput.includes(normalizedName)) {
+      score -= 2;
+    }
+
+    if (score < bestScore) {
+      bestScore = score;
+      bestMatch = name;
+    }
+  });
+
+  if (bestScore <= 3) {
+    return bestMatch;
+  }
+
+  return null;
+}
 
 function formatSubjects(subjects) {
   if (!subjects || subjects.length === 0) {
@@ -298,6 +354,7 @@ function renderCompareResults(majorName, matches) {
 function searchMajor() {
   const universityValue = universityInput.value.trim();
   const majorValue = majorInput.value.trim();
+  const correctedMajor = findClosestMajor(majorValue);
 
   if (!majorValue) {
     resultArea.innerHTML = `
@@ -315,16 +372,29 @@ function searchMajor() {
   if (universityValue) {
     const school = findSchoolByName(universityValue);
 
-    if (!school) {
-      resultArea.innerHTML = `
-        <div class="title-row">
-          <h2 class="result-title">검색 결과</h2>
-          <span class="chip">대학 없음</span>
-        </div>
-        <p class="empty">입력한 대학명을 데이터에서 찾지 못했습니다.</p>
-      `;
-      return;
-    }
+    if (correctedMajor) {
+    majorInput.value = correctedMajor;
+    resultArea.innerHTML = `
+      <div class="title-row">
+        <h2 class="result-title">혹시 "${escapeHtml(correctedMajor)}"를 찾으셨나요?</h2>
+        <span class="chip">자동 교정</span>
+      </div>
+      <p class="empty">입력한 학과명과 가장 비슷한 학과로 다시 검색합니다.</p>
+    `;
+    setTimeout(() => searchMajor(), 300);
+    return;
+  }
+
+  resultArea.innerHTML = `
+    <div class="title-row">
+      <h2 class="result-title">검색 결과</h2>
+      <span class="chip">학과 없음</span>
+    </div>
+    <p class="empty">해당 대학에서 입력한 학과명을 찾지 못했습니다.</p>
+  `;
+  return;
+}
+    
 
     const major = school.majors.find(item =>
       normalizeText(item.name) === normalizedMajor ||
