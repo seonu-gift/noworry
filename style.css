@@ -306,4 +306,27 @@ th{
   th{
     width:130px;
   }
+.similar-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px;
 }
+
+.similar-major-btn{
+  border:none;
+  background:#ffffff;
+  color:#3656c8;
+  border:1px solid #d9e4ff;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.15s ease;
+}
+
+.similar-major-btn:hover{
+  background:#eef4ff;
+  transform:translateY(-1px);
+}}
