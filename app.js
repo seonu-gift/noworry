@@ -8,6 +8,19 @@ const majorList = document.getElementById("majorList");
 const searchBtn = document.getElementById("searchBtn");
 const majorSuggestList = document.getElementById("majorSuggestList");
 
+const SIMILAR_MAJOR_MAP = {
+  "화학공학과": ["화공생명공학과", "고분자공학과", "신소재공학과", "응용화학과", "융합응용화학과", "배터리소재화학공학과"],
+  "화공생명공학과": ["화학공학과", "생명공학과", "고분자공학과", "응용화학과"],
+  "컴퓨터공학과": ["소프트웨어학과", "인공지능학과", "데이터사이언스학과", "정보통신공학과", "컴퓨터학부"],
+  "소프트웨어학과": ["컴퓨터공학과", "인공지능학과", "데이터사이언스학과"],
+  "인공지능학과": ["컴퓨터공학과", "소프트웨어학과", "데이터사이언스학과", "스마트보안학부"],
+  "기계공학과": ["기계공학부", "로봇공학과", "미래모빌리티공학과", "항공우주공학과"],
+  "전자공학과": ["전기전자공학부", "전자전기공학부", "반도체공학과", "정보통신공학과"],
+  "신소재공학과": ["화학공학과", "고분자공학과", "재료공학과", "에너지신소재공학과"],
+  "생명공학과": ["화공생명공학과", "생명과학과", "바이오시스템공학과", "의생명공학과"],
+  "환경공학과": ["환경공학부", "건설환경공학과", "환경안전공학과", "융합환경과학과"]
+};
+
 init();
 
 async function init() {
@@ -130,6 +143,85 @@ function renderUniversityMajorSuggestions() {
   });
 }
 
+function getAllMajorNames() {
+  return [...new Set(DATA.flatMap(school => school.majors.map(major => major.name)))];
+}
+
+function tokenizeMajorName(name) {
+  return normalizeText(name)
+    .replace(/공학과|학과|학부|전공/g, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function getSimilarMajors(targetMajorName) {
+  const allMajors = getAllMajorNames();
+  const targetNormalized = normalizeText(targetMajorName);
+  const targetTokens = tokenizeMajorName(targetMajorName);
+
+  const manualMatches = (SIMILAR_MAJOR_MAP[targetMajorName] || []).filter(name => allMajors.includes(name));
+
+  const scored = allMajors
+    .filter(name => normalizeText(name) !== targetNormalized)
+    .map(name => {
+      const tokens = tokenizeMajorName(name);
+      let score = 0;
+
+      targetTokens.forEach(token => {
+        if (tokens.includes(token)) score += 3;
+        if (normalizeText(name).includes(token) || targetNormalized.includes(token)) score += 1;
+      });
+
+      if (normalizeText(name).includes(targetNormalized) || targetNormalized.includes(normalizeText(name))) {
+        score += 4;
+      }
+
+      return { name, score };
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, "ko"))
+    .map(item => item.name);
+
+  const merged = [...new Set([...manualMatches, ...scored])];
+  return merged.slice(0, 6);
+}
+
+function renderSimilarMajors(targetMajorName) {
+  const similarMajors = getSimilarMajors(targetMajorName);
+
+  if (!similarMajors.length) {
+    return `
+      <div class="section">
+        <h3>비슷한 학과 추천</h3>
+        <div class="similar-wrap">
+          <span class="suggest-empty">비슷한 학과 추천 데이터가 없습니다.</span>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="section">
+      <h3>비슷한 학과 추천</h3>
+      <div class="similar-wrap">
+        ${similarMajors.map(name => `
+          <button class="similar-major-btn" data-major="${escapeHtml(name)}">${escapeHtml(name)}</button>
+        `).join("")}
+      </div>
+      <div class="mini">비슷한 학과를 누르면 해당 학과로 바로 다시 검색할 수 있습니다.</div>
+    </div>
+  `;
+}
+
+function bindSimilarMajorButtons() {
+  document.querySelectorAll(".similar-major-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      majorInput.value = button.dataset.major;
+      searchMajor();
+    });
+  });
+}
+
 function renderSingleResult(university, major) {
   return `
     <div class="title-row">
@@ -170,6 +262,8 @@ function renderSingleResult(university, major) {
       </ul>
     </div>
 
+    ${renderSimilarMajors(major.name)}
+
     <div class="footer">
       이상 ${escapeHtml(university)} ${escapeHtml(major.name)}의 권장 과목에 대해 안내해드렸습니다.
       혹시 어떤 과목 사이에서 고민 중인가요?
@@ -196,6 +290,8 @@ function renderCompareResults(majorName, matches) {
         <p><strong>기타 추천 과목:</strong> ${escapeHtml(formatSubjects(item.major.otherSubjects))}</p>
       </div>
     `).join("")}
+
+    ${renderSimilarMajors(majorName)}
   `;
 }
 
@@ -243,11 +339,14 @@ function searchMajor() {
           <span class="chip">학과 없음</span>
         </div>
         <p class="empty">해당 대학에서 입력한 학과명을 찾지 못했습니다.</p>
+        ${renderSimilarMajors(majorValue)}
       `;
+      bindSimilarMajorButtons();
       return;
     }
 
     resultArea.innerHTML = renderSingleResult(school.university, major);
+    bindSimilarMajorButtons();
     return;
   }
 
@@ -275,16 +374,20 @@ function searchMajor() {
         <span class="chip">데이터 없음</span>
       </div>
       <p class="empty">제공된 데이터 기준으로 해당 정보가 없습니다.</p>
+      ${renderSimilarMajors(majorValue)}
     `;
+    bindSimilarMajorButtons();
     return;
   }
 
   if (matches.length === 1) {
     resultArea.innerHTML = renderSingleResult(matches[0].university, matches[0].major);
+    bindSimilarMajorButtons();
     return;
   }
 
   resultArea.innerHTML = renderCompareResults(majorValue, matches);
+  bindSimilarMajorButtons();
 }
 
 searchBtn.addEventListener("click", searchMajor);
