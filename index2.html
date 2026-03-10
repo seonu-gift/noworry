@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>진정성 과목추천 도우미</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="eyebrow">2022 개정 교육과정 · 과목 추천</div>
+        <h1>진정성 과목추천 도우미</h1>
+        <p class="desc">
+          대학명과 학과명을 입력하면 전공 연계 관점에서 핵심 과목, 권장 과목,
+          기타 추천 과목을 확인할 수 있습니다.
+        </p>
+
+        <div class="search">
+          <div class="field">
+            <input id="universityInput" list="universityList" placeholder="대학명 입력 (예: 경희대학교)" />
+            <datalist id="universityList"></datalist>
+          </div>
+
+          <div class="field">
+            <input id="majorInput" list="majorList" placeholder="학과명 입력 (예: 화학공학과)" />
+            <datalist id="majorList"></datalist>
+          </div>
+
+          <button class="btn" id="searchBtn">추천 보기</button>
+        </div>
+
+        <div class="mini">
+          예시 검색: 경희대학교 / 화학공학과 · 서울시립대학교 / 화학공학과 · 부산대학교 / 화학공학과
+        </div>
+
+        <div class="major-suggest-wrap" id="majorSuggestWrap">
+          <div class="major-suggest-title">이 대학의 학과 추천</div>
+          <div class="major-suggest-list" id="majorSuggestList">
+            <span class="suggest-empty">대학명을 입력하면 해당 대학 학과가 여기에 표시됩니다.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card result" id="resultArea">
+      <div class="title-row">
+        <h2 class="result-title">희망 학과는 무엇인가요?</h2>
+        <span class="chip">JSON 연결 버전</span>
+      </div>
+      <p class="empty">
+        데이터를 불러오는 중입니다.
+      </p>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
