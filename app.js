@@ -1,12 +1,9 @@
 let DATA = [];
 
 const resultArea = document.getElementById("resultArea");
-const universityInput = document.getElementById("universityInput");
 const majorInput = document.getElementById("majorInput");
-const universityList = document.getElementById("universityList");
 const majorList = document.getElementById("majorList");
 const searchBtn = document.getElementById("searchBtn");
-const majorSuggestList = document.getElementById("majorSuggestList");
 
 const SIMILAR_MAJOR_MAP = {
   "화학공학과": ["화공생명공학과", "화공생물공학과", "고분자공학과", "신소재공학과", "응용화학과", "융합응용화학과", "배터리소재화학공학과"],
@@ -37,19 +34,17 @@ async function init() {
       throw new Error("majors.json 형식이 올바르지 않습니다. 최상위는 배열이어야 합니다.");
     }
 
-    fillDatalists();
+    fillMajorDatalist();
 
     resultArea.innerHTML = `
       <div class="title-row">
         <h2 class="result-title">희망 학과는 무엇인가요?</h2>
-        <span class="chip">데이터 로드 완료</span>
+        <span class="chip">학과 검색 전용</span>
       </div>
       <p class="empty">
-        대학명과 학과명을 입력하면 결과가 여기에 표시됩니다.
+        학과명을 입력하면 주요 대학의 동일 학과와 유사 학과 권장과목을 비교해서 보여드립니다.
       </p>
     `;
-
-    renderUniversityMajorSuggestions();
   } catch (error) {
     resultArea.innerHTML = `
       <div class="title-row">
@@ -63,20 +58,14 @@ async function init() {
   }
 }
 
-function fillDatalists() {
-  if (!universityList || !majorList) return;
+function fillMajorDatalist() {
+  if (!majorList) return;
 
-  universityList.innerHTML = "";
   majorList.innerHTML = "";
 
-  const universities = [...new Set(DATA.map(item => item.university).filter(Boolean))].sort((a, b) => a.localeCompare(b, "ko"));
-  const majors = [...new Set(DATA.flatMap(item => (item.majors || []).map(major => major.name).filter(Boolean)))].sort((a, b) => a.localeCompare(b, "ko"));
-
-  universities.forEach(university => {
-    const option = document.createElement("option");
-    option.value = university;
-    universityList.appendChild(option);
-  });
+  const majors = [...new Set(
+    DATA.flatMap(item => (item.majors || []).map(major => major.name).filter(Boolean))
+  )].sort((a, b) => a.localeCompare(b, "ko"));
 
   majors.forEach(major => {
     const option = document.createElement("option");
@@ -123,59 +112,6 @@ function getOtherSubjects(major) {
   return major.otherSubjects || major.other || [];
 }
 
-function getReasons(major) {
-  return major.reasons || [];
-}
-
-function findSchoolByName(inputValue) {
-  const normalizedUniversity = normalizeText(inputValue);
-
-  return DATA.find(item => {
-    const uni = normalizeText(item.university);
-    return (
-      uni === normalizedUniversity ||
-      uni.includes(normalizedUniversity) ||
-      normalizedUniversity.includes(uni)
-    );
-  });
-}
-
-function renderUniversityMajorSuggestions() {
-  if (!majorSuggestList || !universityInput) return;
-
-  const universityValue = universityInput.value.trim();
-
-  if (!universityValue) {
-    majorSuggestList.innerHTML = `<span class="suggest-empty">대학명을 입력하면 해당 대학 학과가 여기에 표시됩니다.</span>`;
-    return;
-  }
-
-  const school = findSchoolByName(universityValue);
-
-  if (!school) {
-    majorSuggestList.innerHTML = `<span class="suggest-empty">해당 대학을 찾지 못했습니다.</span>`;
-    return;
-  }
-
-  if (!school.majors || school.majors.length === 0) {
-    majorSuggestList.innerHTML = `<span class="suggest-empty">표시할 학과 데이터가 없습니다.</span>`;
-    return;
-  }
-
-  majorSuggestList.innerHTML = school.majors
-    .map(major => `<button type="button" class="major-chip-btn" data-major="${escapeHtml(major.name)}">${escapeHtml(major.name)}</button>`)
-    .join("");
-
-  document.querySelectorAll(".major-chip-btn").forEach(button => {
-    button.addEventListener("click", () => {
-      if (majorInput) {
-        majorInput.value = button.dataset.major;
-      }
-      searchMajor();
-    });
-  });
-}
-
 function getAllMajorNames() {
   return [...new Set(DATA.flatMap(school => (school.majors || []).map(major => major.name)).filter(Boolean))];
 }
@@ -216,7 +152,7 @@ function getSimilarMajors(targetMajorName) {
     .map(item => item.name);
 
   const merged = [...new Set([...manualMatches, ...scored])];
-  return merged.slice(0, 8);
+  return merged.slice(0, 10);
 }
 
 function findMajorMatchesAcrossUniversities(inputMajorName) {
@@ -267,54 +203,37 @@ function findMajorMatchesAcrossUniversities(inputMajorName) {
   };
 }
 
-function renderMajorCard(item, relationLabel) {
+function renderCompareTable(rows, relationLabel) {
+  if (!rows.length) {
+    return `<div class="footer">${escapeHtml(relationLabel)} 결과가 없습니다.</div>`;
+  }
+
   return `
-    <div class="compare-card">
-      <div class="title-row">
-        <h3 style="margin:0;">${escapeHtml(item.university)} ${escapeHtml(item.major.name)}</h3>
-        <span class="chip">${escapeHtml(relationLabel)}</span>
-      </div>
-      <p><strong>핵심 과목:</strong> ${escapeHtml(formatSubjects(getCoreSubjects(item.major)))}</p>
-      <p><strong>권장 과목:</strong> ${escapeHtml(formatSubjects(getRecommendedSubjects(item.major)))}</p>
-      <p><strong>기타 추천 과목:</strong> ${escapeHtml(formatSubjects(getOtherSubjects(item.major)))}</p>
-    </div>
-  `;
-}
-
-function renderSingleResult(university, major) {
-  return `
-    <div class="title-row">
-      <h2 class="result-title">${escapeHtml(university)} ${escapeHtml(major.name)}</h2>
-      <span class="chip">2022 개정 교육과정</span>
-      <span class="chip">전공 연계 추천</span>
-    </div>
-
-    <table>
-      <tbody>
-        <tr>
-          <th>핵심 과목</th>
-          <td>${escapeHtml(formatSubjects(getCoreSubjects(major)))}</td>
-        </tr>
-        <tr>
-          <th>권장 과목</th>
-          <td>${escapeHtml(formatSubjects(getRecommendedSubjects(major)))}</td>
-        </tr>
-        <tr>
-          <th>기타 추천 과목</th>
-          <td>${escapeHtml(formatSubjects(getOtherSubjects(major)))}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="section">
-      <h3>과목 권장 이유 및 학과 연계 설명</h3>
-      <ul class="reasons">
-        ${
-          getReasons(major).length
-            ? getReasons(major).map(reason => `<li>${escapeHtml(reason)}</li>`).join("")
-            : "<li>제공된 데이터 기준으로 해당 정보가 없습니다.</li>"
-        }
-      </ul>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>대학명</th>
+            <th>학과명</th>
+            <th>구분</th>
+            <th>핵심 과목</th>
+            <th>권장 과목</th>
+            <th>기타 추천 과목</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map(item => `
+            <tr>
+              <td>${escapeHtml(item.university)}</td>
+              <td>${escapeHtml(item.major.name)}</td>
+              <td><span class="relation-badge">${escapeHtml(relationLabel)}</span></td>
+              <td>${escapeHtml(formatSubjects(getCoreSubjects(item.major)))}</td>
+              <td>${escapeHtml(formatSubjects(getRecommendedSubjects(item.major)))}</td>
+              <td>${escapeHtml(formatSubjects(getOtherSubjects(item.major)))}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
     </div>
   `;
 }
@@ -322,37 +241,33 @@ function renderSingleResult(university, major) {
 function renderSeparatedMajorResults(inputMajorName, exactMatches, similarMatches) {
   return `
     <div class="title-row">
-      <h2 class="result-title">${escapeHtml(inputMajorName)} 대학별 검색 결과</h2>
+      <h2 class="result-title">${escapeHtml(inputMajorName)} 검색 결과</h2>
       <span class="chip">정확히 일치 ${exactMatches.length}개</span>
-      <span class="chip">비슷한 학과 ${similarMatches.length}개</span>
+      <span class="chip">유사학과 ${similarMatches.length}개</span>
     </div>
 
     <p class="summary">
-      입력한 학과명과 정확히 일치하는 학과를 먼저 보여드리고, 그 아래에 비슷한 학과를 따로 정리했습니다.
+      입력한 학과명과 정확히 일치하는 학과를 먼저 보여드리고,
+      주요 대학의 유사학과도 함께 비교할 수 있도록 표로 정리했습니다.
     </p>
 
     <div class="section">
       <h3>정확히 일치하는 학과</h3>
-      ${
-        exactMatches.length
-          ? exactMatches.map(item => renderMajorCard(item, "정확히 일치")).join("")
-          : `<div class="compare-card"><p>정확히 일치하는 학과는 없습니다.</p></div>`
-      }
+      ${renderCompareTable(exactMatches, "정확히 일치")}
     </div>
 
     <div class="section">
-      <h3>비슷한 학과 추천</h3>
-      ${
-        similarMatches.length
-          ? similarMatches.map(item => renderMajorCard(item, "비슷한 학과")).join("")
-          : `<div class="compare-card"><p>비슷한 학과 추천 결과가 없습니다.</p></div>`
-      }
+      <h3>주요 대학 유사학과</h3>
+      ${renderCompareTable(similarMatches, "유사학과")}
+    </div>
+
+    <div class="footer">
+      학과명만 검색하면 주요 대학의 동일 학과와 유사학과 권장과목을 함께 비교할 수 있습니다.
     </div>
   `;
 }
 
 function searchMajor() {
-  const universityValue = universityInput.value.trim();
   const majorValue = majorInput.value.trim();
 
   if (!majorValue) {
@@ -363,46 +278,6 @@ function searchMajor() {
       </div>
       <p class="empty">학과명을 입력해주세요.</p>
     `;
-    return;
-  }
-
-  const normalizedMajor = normalizeText(majorValue);
-
-  if (universityValue) {
-    const school = findSchoolByName(universityValue);
-
-    if (!school) {
-      resultArea.innerHTML = `
-        <div class="title-row">
-          <h2 class="result-title">검색 결과</h2>
-          <span class="chip">대학 없음</span>
-        </div>
-        <p class="empty">입력한 대학명을 데이터에서 찾지 못했습니다.</p>
-      `;
-      return;
-    }
-
-    const major = (school.majors || []).find(item => {
-      const name = normalizeText(item.name);
-      return (
-        name === normalizedMajor ||
-        name.includes(normalizedMajor) ||
-        normalizedMajor.includes(name)
-      );
-    });
-
-    if (!major) {
-      resultArea.innerHTML = `
-        <div class="title-row">
-          <h2 class="result-title">검색 결과</h2>
-          <span class="chip">학과 없음</span>
-        </div>
-        <p class="empty">해당 대학에서 입력한 학과명을 찾지 못했습니다.</p>
-      `;
-      return;
-    }
-
-    resultArea.innerHTML = renderSingleResult(school.university, major);
     return;
   }
 
@@ -432,15 +307,4 @@ if (majorInput) {
       searchMajor();
     }
   });
-}
-
-if (universityInput) {
-  universityInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      searchMajor();
-    }
-  });
-
-  universityInput.addEventListener("input", renderUniversityMajorSuggestions);
-  universityInput.addEventListener("change", renderUniversityMajorSuggestions);
 }
