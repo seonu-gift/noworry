@@ -7,32 +7,49 @@ const searchBtn = document.getElementById("searchBtn");
 
 const SIMILAR_MAJOR_MAP = {
   "화학공학과": ["화공생명공학과", "화공생물공학과", "고분자공학과", "신소재공학과", "응용화학과", "융합응용화학과", "배터리소재화학공학과"],
+  "화학공학": ["화학공학과", "화공생명공학과", "화공생물공학과", "고분자공학과", "신소재공학과"],
+  "화공": ["화학공학과", "화공생명공학과", "화공생물공학과"],
   "화공생명공학과": ["화학공학과", "화공생물공학과", "생명공학과", "고분자공학과", "응용화학과"],
   "화공생물공학과": ["화학공학과", "화공생명공학과", "생명공학과", "고분자공학과"],
+
   "컴퓨터공학과": ["소프트웨어학과", "인공지능학과", "데이터사이언스학과", "정보통신공학과", "컴퓨터학과", "컴퓨터과학부", "컴퓨터·AI학부"],
+  "컴퓨터공학": ["컴퓨터공학과", "컴퓨터학과", "컴퓨터과학부", "컴퓨터·AI학부", "소프트웨어학과"],
+  "컴퓨터": ["컴퓨터공학과", "컴퓨터학과", "컴퓨터과학부", "컴퓨터·AI학부", "소프트웨어학과"],
   "소프트웨어학과": ["컴퓨터공학과", "인공지능학과", "데이터사이언스학과"],
+  "소프트웨어": ["소프트웨어학과", "컴퓨터공학과", "컴퓨터과학부"],
   "인공지능학과": ["컴퓨터공학과", "소프트웨어학과", "데이터사이언스학과", "컴퓨터·AI학부", "의료인공지능공학과"],
+  "인공지능": ["인공지능학과", "의료인공지능공학과", "컴퓨터·AI학부"],
+
   "기계공학과": ["기계공학부", "기계정보공학과", "기계로봇에너지공학과", "로봇공학과"],
+  "기계공학": ["기계공학과", "기계공학부", "기계정보공학과", "기계로봇에너지공학과"],
+  "기계": ["기계공학과", "기계공학부", "기계정보공학과", "기계로봇에너지공학과"],
+
   "전자공학과": ["전기전자공학부", "전자전기공학부", "반도체공학과", "정보통신공학과"],
+  "전자공학": ["전자공학과", "전기전자공학부", "전자전기공학부", "정보통신공학과"],
+  "전자": ["전자공학과", "전기전자공학부", "전자전기공학부"],
+
   "신소재공학과": ["화학공학과", "고분자공학과", "재료공학과", "에너지신소재공학과"],
+  "신소재": ["신소재공학과", "에너지신소재공학과", "재료공학과"],
   "생명공학과": ["화공생명공학과", "화공생물공학과", "생명과학과", "의생명공학과", "바이오시스템공학과"],
+  "생명공학": ["생명공학과", "화공생명공학과", "화공생물공학과", "생명과학과", "의생명공학과"],
+  "생명": ["생명공학과", "생명과학과", "의생명과학과", "의생명공학과"],
   "환경공학과": ["환경공학부", "건설환경공학과", "환경안전공학과", "융합환경과학과"],
+  "환경공학": ["환경공학과", "환경공학부", "건설환경공학과", "환경안전공학과"],
 
   "국어": ["국어국문학과", "국어국문·문예창작학부", "국어교육과"],
   "국문": ["국어국문학과", "국어국문·문예창작학부", "국어교육과"],
   "국어국문": ["국어국문학과", "국어국문·문예창작학부", "국어교육과"],
+  "문예창작": ["국어국문·문예창작학부"],
+  "영문": ["영어영문학부", "영어영문학과"],
+  "영어": ["영어영문학부", "영어영문학과"],
 
+  "사회학": ["사회학과", "사회학전공", "사회복지학과", "사회복지학부"],
   "사회": ["사회학과", "사회학전공", "사회복지학과", "사회복지학부"],
-  "사회학": ["사회학과", "사회학전공"],
+  "사회복지": ["사회복지학과", "사회복지학부"],
   "정치": ["정치외교학과", "정치외교학전공"],
   "행정": ["행정학과", "행정학전공"],
-
-  "기계": ["기계공학과", "기계공학부", "기계정보공학과", "기계로봇에너지공학과"],
-  "컴퓨터": ["컴퓨터공학과", "컴퓨터학과", "컴퓨터과학부", "컴퓨터·AI학부"],
-  "소프트웨어": ["소프트웨어학과", "컴퓨터공학과", "컴퓨터과학부"],
-  "인공지능": ["인공지능학과", "의료인공지능공학과", "컴퓨터·AI학부"],
-  "전자": ["전자공학과", "전자전기공학부", "전기전자공학부"],
-  "생명": ["생명공학과", "생명과학과", "의생명과학과", "의생명공학과"]
+  "경제": ["경제학과", "경제학부"],
+  "경영": ["경영학과", "경영학부"]
 };
 
 init();
@@ -159,6 +176,8 @@ function tokenizeMajorName(name) {
     .replace(/행정학/g, "행정학 ")
     .replace(/경제학/g, "경제학 ")
     .replace(/경영학/g, "경영학 ")
+    .replace(/영어영문/g, "영어영문 ")
+
     .replace(/화학공학/g, "화학공학 ")
     .replace(/화공생명/g, "화공생명 ")
     .replace(/화공생물/g, "화공생물 ")
@@ -168,6 +187,7 @@ function tokenizeMajorName(name) {
     .replace(/생명공학/g, "생명공학 ")
     .replace(/의생명/g, "의생명 ")
     .replace(/생명과학/g, "생명과학 ")
+
     .replace(/컴퓨터공학/g, "컴퓨터공학 ")
     .replace(/컴퓨터과학/g, "컴퓨터과학 ")
     .replace(/컴퓨터ai/g, "컴퓨터ai ")
@@ -175,6 +195,7 @@ function tokenizeMajorName(name) {
     .replace(/인공지능/g, "인공지능 ")
     .replace(/의료인공지능/g, "의료인공지능 ")
     .replace(/데이터사이언스/g, "데이터사이언스 ")
+
     .replace(/기계공학/g, "기계공학 ")
     .replace(/기계정보/g, "기계정보 ")
     .replace(/기계로봇에너지/g, "기계로봇에너지 ")
@@ -183,6 +204,7 @@ function tokenizeMajorName(name) {
     .replace(/전기전자/g, "전기전자 ")
     .replace(/정보통신/g, "정보통신 ")
     .replace(/반도체/g, "반도체 ")
+
     .replace(/공학과|학과|학부|전공/g, " ")
     .split(/\s+/)
     .filter(Boolean);
@@ -196,7 +218,7 @@ function getSimilarMajors(targetMajorName) {
   const manualMatches = (SIMILAR_MAJOR_MAP[targetMajorName] || [])
     .filter(name => allMajors.includes(name));
 
-  const strictMatches = allMajors.filter(name => {
+  const flexibleMatches = allMajors.filter(name => {
     const normalizedName = normalizeText(name);
     const tokens = tokenizeMajorName(name);
 
@@ -204,12 +226,7 @@ function getSimilarMajors(targetMajorName) {
       return false;
     }
 
-    // 입력이 1~2글자면 아주 엄격하게: 시작 일치만 허용
-    if (targetNormalized.length <= 2) {
-      return normalizedName.startsWith(targetNormalized);
-    }
-
-    // 명확한 포함 관계
+    // 입력어가 학과명 안에 자연스럽게 포함
     if (
       normalizedName.includes(targetNormalized) ||
       targetNormalized.includes(normalizedName)
@@ -217,18 +234,24 @@ function getSimilarMajors(targetMajorName) {
       return true;
     }
 
-    // 핵심 토큰 일치
-    const commonTokens = targetTokens.filter(token => tokens.includes(token));
-    const meaningfulCommonTokens = commonTokens.filter(token => token.length >= 2);
+    // 핵심 토큰 공유 (2글자 이상)
+    const commonTokens = targetTokens.filter(token =>
+      token.length >= 2 && tokens.includes(token)
+    );
 
-    if (meaningfulCommonTokens.length >= 1) {
+    if (commonTokens.length >= 1) {
+      return true;
+    }
+
+    // 짧은 검색어 예외: 시작 부분이 같으면 허용
+    if (targetNormalized.length <= 3 && normalizedName.startsWith(targetNormalized)) {
       return true;
     }
 
     return false;
   });
 
-  return [...new Set([...manualMatches, ...strictMatches])].slice(0, 8);
+  return [...new Set([...manualMatches, ...flexibleMatches])].slice(0, 8);
 }
 
 function findMajorMatchesAcrossUniversities(inputMajorName) {
@@ -342,7 +365,7 @@ function renderSeparatedMajorResults(inputMajorName, exactMatches, similarMatche
     </div>
 
     <div class="footer">
-      유사학과는 포함 관계, 핵심 토큰 일치, 수동 유사학과 사전을 기준으로 좁혀서 보여줍니다.
+      유사학과는 학과명 포함 관계, 핵심 토큰 일치, 수동 유사학과 사전을 기준으로 보여줍니다.
     </div>
   `;
 }
