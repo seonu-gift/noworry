@@ -329,4 +329,22 @@ th{
 .similar-major-btn:hover{
   background:#eef4ff;
   transform:translateY(-1px);
-}}
+}
+.compare-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin-top:14px;
+  background:#fff;
+}
+
+.compare-card h3{
+  margin:0 0 8px;
+  font-size:20px;
+}
+
+.compare-card p{
+  margin:6px 0;
+  line-height:1.7;
+}
+}
