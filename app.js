@@ -16,7 +16,23 @@ const SIMILAR_MAJOR_MAP = {
   "전자공학과": ["전기전자공학부", "전자전기공학부", "반도체공학과", "정보통신공학과"],
   "신소재공학과": ["화학공학과", "고분자공학과", "재료공학과", "에너지신소재공학과"],
   "생명공학과": ["화공생명공학과", "화공생물공학과", "생명과학과", "의생명공학과", "바이오시스템공학과"],
-  "환경공학과": ["환경공학부", "건설환경공학과", "환경안전공학과", "융합환경과학과"]
+  "환경공학과": ["환경공학부", "건설환경공학과", "환경안전공학과", "융합환경과학과"],
+
+  "국어": ["국어국문학과", "국어국문·문예창작학부", "국어교육과"],
+  "국문": ["국어국문학과", "국어국문·문예창작학부", "국어교육과"],
+  "국어국문": ["국어국문학과", "국어국문·문예창작학부", "국어교육과"],
+
+  "사회": ["사회학과", "사회학전공", "사회복지학과", "사회복지학부"],
+  "사회학": ["사회학과", "사회학전공"],
+  "정치": ["정치외교학과", "정치외교학전공"],
+  "행정": ["행정학과", "행정학전공"],
+
+  "기계": ["기계공학과", "기계공학부", "기계정보공학과", "기계로봇에너지공학과"],
+  "컴퓨터": ["컴퓨터공학과", "컴퓨터학과", "컴퓨터과학부", "컴퓨터·AI학부"],
+  "소프트웨어": ["소프트웨어학과", "컴퓨터공학과", "컴퓨터과학부"],
+  "인공지능": ["인공지능학과", "의료인공지능공학과", "컴퓨터·AI학부"],
+  "전자": ["전자공학과", "전자전기공학부", "전기전자공학부"],
+  "생명": ["생명공학과", "생명과학과", "의생명과학과", "의생명공학과"]
 };
 
 init();
@@ -42,7 +58,7 @@ async function init() {
         <span class="chip">학과 검색 전용</span>
       </div>
       <p class="empty">
-        학과명을 입력하면 주요 대학의 동일 학과와 유사 학과 권장과목을 비교해서 보여드립니다.
+        학과명을 입력하면 주요 대학의 동일 학과와 유사학과 권장과목을 비교해서 보여드립니다.
       </p>
     `;
   } catch (error) {
@@ -65,7 +81,9 @@ function fillMajorDatalist() {
 
   const majors = [...new Set(
     DATA.flatMap(item => (item.majors || []).map(major => major.name).filter(Boolean))
-  )].sort((a, b) => a.localeCompare(b, "ko"));
+  )]
+    .filter(name => !isBroadCategoryName(name))
+    .sort((a, b) => a.localeCompare(b, "ko"));
 
   majors.forEach(major => {
     const option = document.createElement("option");
@@ -112,47 +130,105 @@ function getOtherSubjects(major) {
   return major.otherSubjects || major.other || [];
 }
 
+function isBroadCategoryName(name) {
+  const broadKeywords = [
+    "대학",
+    "계열",
+    "학부대학",
+    "자유전공",
+    "열린전공"
+  ];
+
+  return broadKeywords.some(keyword => name.includes(keyword));
+}
+
 function getAllMajorNames() {
-  return [...new Set(DATA.flatMap(school => (school.majors || []).map(major => major.name)).filter(Boolean))];
+  return [...new Set(
+    DATA.flatMap(school => (school.majors || []).map(major => major.name)).filter(Boolean)
+  )];
 }
 
 function tokenizeMajorName(name) {
   return normalizeText(name)
+    .replace(/국어국문/g, "국어국문 ")
+    .replace(/문예창작/g, "문예창작 ")
+    .replace(/국어교육/g, "국어교육 ")
+    .replace(/사회학/g, "사회학 ")
+    .replace(/사회복지/g, "사회복지 ")
+    .replace(/정치외교/g, "정치외교 ")
+    .replace(/행정학/g, "행정학 ")
+    .replace(/경제학/g, "경제학 ")
+    .replace(/경영학/g, "경영학 ")
+    .replace(/화학공학/g, "화학공학 ")
+    .replace(/화공생명/g, "화공생명 ")
+    .replace(/화공생물/g, "화공생물 ")
+    .replace(/고분자/g, "고분자 ")
+    .replace(/신소재/g, "신소재 ")
+    .replace(/환경공학/g, "환경공학 ")
+    .replace(/생명공학/g, "생명공학 ")
+    .replace(/의생명/g, "의생명 ")
+    .replace(/생명과학/g, "생명과학 ")
+    .replace(/컴퓨터공학/g, "컴퓨터공학 ")
+    .replace(/컴퓨터과학/g, "컴퓨터과학 ")
+    .replace(/컴퓨터ai/g, "컴퓨터ai ")
+    .replace(/소프트웨어/g, "소프트웨어 ")
+    .replace(/인공지능/g, "인공지능 ")
+    .replace(/의료인공지능/g, "의료인공지능 ")
+    .replace(/데이터사이언스/g, "데이터사이언스 ")
+    .replace(/기계공학/g, "기계공학 ")
+    .replace(/기계정보/g, "기계정보 ")
+    .replace(/기계로봇에너지/g, "기계로봇에너지 ")
+    .replace(/전자공학/g, "전자공학 ")
+    .replace(/전자전기/g, "전자전기 ")
+    .replace(/전기전자/g, "전기전자 ")
+    .replace(/정보통신/g, "정보통신 ")
+    .replace(/반도체/g, "반도체 ")
     .replace(/공학과|학과|학부|전공/g, " ")
     .split(/\s+/)
     .filter(Boolean);
 }
 
 function getSimilarMajors(targetMajorName) {
-  const allMajors = getAllMajorNames();
+  const allMajors = getAllMajorNames().filter(name => !isBroadCategoryName(name));
   const targetNormalized = normalizeText(targetMajorName);
   const targetTokens = tokenizeMajorName(targetMajorName);
 
-  const manualMatches = (SIMILAR_MAJOR_MAP[targetMajorName] || []).filter(name => allMajors.includes(name));
+  const manualMatches = (SIMILAR_MAJOR_MAP[targetMajorName] || [])
+    .filter(name => allMajors.includes(name));
 
-  const scored = allMajors
-    .filter(name => normalizeText(name) !== targetNormalized)
-    .map(name => {
-      const tokens = tokenizeMajorName(name);
-      let score = 0;
+  const strictMatches = allMajors.filter(name => {
+    const normalizedName = normalizeText(name);
+    const tokens = tokenizeMajorName(name);
 
-      targetTokens.forEach(token => {
-        if (tokens.includes(token)) score += 3;
-        if (normalizeText(name).includes(token) || targetNormalized.includes(token)) score += 1;
-      });
+    if (normalizedName === targetNormalized) {
+      return false;
+    }
 
-      if (normalizeText(name).includes(targetNormalized) || targetNormalized.includes(normalizeText(name))) {
-        score += 4;
-      }
+    // 입력이 1~2글자면 아주 엄격하게: 시작 일치만 허용
+    if (targetNormalized.length <= 2) {
+      return normalizedName.startsWith(targetNormalized);
+    }
 
-      return { name, score };
-    })
-    .filter(item => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, "ko"))
-    .map(item => item.name);
+    // 명확한 포함 관계
+    if (
+      normalizedName.includes(targetNormalized) ||
+      targetNormalized.includes(normalizedName)
+    ) {
+      return true;
+    }
 
-  const merged = [...new Set([...manualMatches, ...scored])];
-  return merged.slice(0, 10);
+    // 핵심 토큰 일치
+    const commonTokens = targetTokens.filter(token => tokens.includes(token));
+    const meaningfulCommonTokens = commonTokens.filter(token => token.length >= 2);
+
+    if (meaningfulCommonTokens.length >= 1) {
+      return true;
+    }
+
+    return false;
+  });
+
+  return [...new Set([...manualMatches, ...strictMatches])].slice(0, 8);
 }
 
 function findMajorMatchesAcrossUniversities(inputMajorName) {
@@ -165,6 +241,10 @@ function findMajorMatchesAcrossUniversities(inputMajorName) {
 
   DATA.forEach(school => {
     (school.majors || []).forEach(major => {
+      if (isBroadCategoryName(major.name)) {
+        return;
+      }
+
       const majorNormalized = normalizeText(major.name);
 
       const exactMatch =
@@ -262,7 +342,7 @@ function renderSeparatedMajorResults(inputMajorName, exactMatches, similarMatche
     </div>
 
     <div class="footer">
-      학과명만 검색하면 주요 대학의 동일 학과와 유사학과 권장과목을 함께 비교할 수 있습니다.
+      유사학과는 포함 관계, 핵심 토큰 일치, 수동 유사학과 사전을 기준으로 좁혀서 보여줍니다.
     </div>
   `;
 }
