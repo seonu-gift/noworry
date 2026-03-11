@@ -1,56 +1,737 @@
 [
   {
-    "university": "경희대학교",
+    "university": "서울대",
+    "region": "수도권",
+    "area": "서울",
     "majors": [
       {
-        "name": "화학공학과",
-        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "물리학", "화학"],
-        "recommendedSubjects": ["미적분Ⅱ", "기하"],
-        "otherSubjects": ["물질과 에너지", "화학 반응의 세계"],
-        "reasons": ["화학공학은 수학과 화학 기반이 중요합니다."]
+        "name": "국어국문학과",
+        "category": "인문",
+        "coreSubjects": ["제2외국어/한문"],
+        "recommendedSubjects": ["1과목 이상"],
+        "otherSubjects": [],
+        "reasons": ["서울대 인문계열은 제2외국어/한문 1과목 이상 이수가 안내됩니다."]
       },
       {
-        "name": "컴퓨터공학과",
-        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계"],
-        "recommendedSubjects": ["미적분Ⅱ", "기하"],
-        "otherSubjects": ["인공지능 수학"],
-        "reasons": ["컴퓨터공학은 수학 기반 사고가 중요합니다."]
+        "name": "사회학과",
+        "category": "사회",
+        "coreSubjects": ["제2외국어/한문"],
+        "recommendedSubjects": ["1과목 이상"],
+        "otherSubjects": [],
+        "reasons": ["서울대 사회과학계열은 제2외국어/한문 1과목 이상 이수가 안내됩니다."]
+      },
+      {
+        "name": "수학교육과",
+        "category": "교육",
+        "coreSubjects": ["미적분Ⅱ", "기하"],
+        "recommendedSubjects": ["수학 관련 과목 위계 이수"],
+        "otherSubjects": [],
+        "reasons": ["서울대 수학교육과는 수학 심화 과목 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "생명과학부",
+        "category": "자연",
+        "coreSubjects": ["기하", "미적분Ⅱ", "생명과학"],
+        "recommendedSubjects": ["과학 진로선택 과목"],
+        "otherSubjects": ["과학 교과 진로선택 3과목 이상"],
+        "reasons": ["서울대 자연계열은 수학 심화와 과학 진로선택 과목 이수가 강조됩니다."]
+      },
+      {
+        "name": "화학부",
+        "category": "자연",
+        "coreSubjects": ["기하", "미적분Ⅱ", "화학"],
+        "recommendedSubjects": ["과학 진로선택 과목"],
+        "otherSubjects": ["과학 교과 진로선택 3과목 이상"],
+        "reasons": ["서울대 화학부는 화학 중심 이수와 과학 심화 과목 이수가 중요합니다."]
+      },
+      {
+        "name": "기계공학부",
+        "category": "공학",
+        "coreSubjects": ["기하", "미적분Ⅱ", "물리학"],
+        "recommendedSubjects": ["과학 진로선택 과목"],
+        "otherSubjects": [],
+        "reasons": ["서울대 공학계열은 수학과 과학 위계 이수가 강조됩니다."]
+      },
+      {
+        "name": "약학과",
+        "category": "의약",
+        "coreSubjects": ["화학 또는 생명과학"],
+        "recommendedSubjects": ["기하", "미적분Ⅱ", "과학"],
+        "otherSubjects": ["과학 교과 진로선택 3과목 이상"],
+        "reasons": ["서울대 약학과는 화학 또는 생명과학을 중심으로 수학·과학 심화 이수가 안내됩니다."]
+      },
+      {
+        "name": "자유전공학부",
+        "category": "기타",
+        "coreSubjects": [],
+        "recommendedSubjects": ["기하", "미적분Ⅱ", "과학"],
+        "otherSubjects": ["과학 교과 진로선택 3과목 이상"],
+        "reasons": ["서울대 자유전공학부는 기하, 미적분Ⅱ, 과학 및 과학 진로선택 과목 이수가 안내됩니다."]
       }
     ]
   },
   {
-    "university": "고려대학교",
+    "university": "고려대",
+    "region": "수도권",
+    "area": "서울",
     "majors": [
       {
         "name": "화공생명공학과",
+        "category": "공학",
         "coreSubjects": ["기하"],
         "recommendedSubjects": ["역학과에너지", "전자기와양자", "물질과에너지", "화학반응의세계"],
-        "otherSubjects": ["위 과목 중 2개 과목"],
-        "reasons": ["화공생명공학과는 물리·화학 진로선택 과목 이수가 중요합니다."]
+        "otherSubjects": ["위 과목 중 2과목"],
+        "reasons": ["고려대 화공생명공학과는 기하와 물리·화학 진로선택 과목 이수가 권장됩니다."]
+      },
+      {
+        "name": "기계공학부",
+        "category": "공학",
+        "coreSubjects": [],
+        "recommendedSubjects": ["역학과에너지", "전자기와양자"],
+        "otherSubjects": [],
+        "reasons": ["고려대 기계공학부는 물리 계열 진로선택 과목 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "전기전자공학부",
+        "category": "공학",
+        "coreSubjects": ["기하"],
+        "recommendedSubjects": ["역학과에너지", "전자기와양자", "물질과에너지", "화학반응의세계"],
+        "otherSubjects": ["위 과목 중 2과목"],
+        "reasons": ["고려대 전기전자공학부는 기하와 물리·화학 진로선택 과목 이수가 권장됩니다."]
+      },
+      {
+        "name": "컴퓨터학과",
+        "category": "컴퓨터",
+        "coreSubjects": ["기하"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["고려대 컴퓨터학과는 기하 중심의 수학 이수가 안내됩니다."]
+      },
+      {
+        "name": "인공지능학과",
+        "category": "컴퓨터",
+        "coreSubjects": ["기하"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["고려대 인공지능학과는 기하 중심의 수학 이수가 안내됩니다."]
+      },
+      {
+        "name": "수학과",
+        "category": "자연",
+        "coreSubjects": ["기하"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["고려대 수학과는 기하 이수가 권장됩니다."]
+      },
+      {
+        "name": "물리학과",
+        "category": "자연",
+        "coreSubjects": [],
+        "recommendedSubjects": ["역학과에너지", "전자기와양자"],
+        "otherSubjects": [],
+        "reasons": ["고려대 물리학과는 물리 진로선택 과목 이수가 권장됩니다."]
+      },
+      {
+        "name": "화학과",
+        "category": "자연",
+        "coreSubjects": ["기하"],
+        "recommendedSubjects": ["물질과에너지", "화학반응의세계"],
+        "otherSubjects": [],
+        "reasons": ["고려대 화학과는 기하와 화학 진로선택 과목 이수가 권장됩니다."]
+      },
+      {
+        "name": "바이오의공학부",
+        "category": "자연",
+        "coreSubjects": [],
+        "recommendedSubjects": ["역학과에너지", "전자기와양자", "물질과에너지", "화학반응의세계"],
+        "otherSubjects": ["위 과목 중 2과목"],
+        "reasons": ["고려대 바이오의공학부는 물리·화학 진로선택 과목 중 2과목 이수가 권장됩니다."]
       }
     ]
   },
   {
-    "university": "동국대학교",
+    "university": "중앙대",
+    "region": "수도권",
+    "area": "서울",
     "majors": [
       {
-        "name": "화공생물공학과",
-        "coreSubjects": [],
-        "recommendedSubjects": ["생명과학"],
+        "name": "자연계열",
+        "category": "자연",
+        "coreSubjects": ["미적분Ⅱ 또는 기하"],
+        "recommendedSubjects": ["물리학", "화학", "생명과학 중 1과목 이상"],
+        "otherSubjects": ["진로선택 2과목 이상"],
+        "reasons": ["중앙대 자연계열은 수학과 과학 이수 권장 기준을 제시합니다."]
+      },
+      {
+        "name": "기계공학부",
+        "category": "공학",
+        "coreSubjects": ["미적분Ⅱ 또는 기하", "물리학", "화학"],
+        "recommendedSubjects": ["역학과 에너지", "전자기와 양자"],
         "otherSubjects": [],
-        "reasons": ["화공생물공학과는 생명과학 소양 영역이 제시됩니다."]
+        "reasons": ["중앙대 기계공학부는 미적분Ⅱ·기하와 물리·화학 기반 이수가 권장됩니다."]
+      },
+      {
+        "name": "화학공학과",
+        "category": "공학",
+        "coreSubjects": ["미적분Ⅱ", "기하", "화학", "물리학"],
+        "recommendedSubjects": ["물질과 에너지", "화학반응의 세계"],
+        "otherSubjects": [],
+        "reasons": ["중앙대 화학공학과는 미적분Ⅱ·기하와 화학·물리 기반 이수가 권장됩니다."]
+      },
+      {
+        "name": "전자전기공학부",
+        "category": "공학",
+        "coreSubjects": ["미적분Ⅱ", "기하", "물리학", "화학"],
+        "recommendedSubjects": ["역학과 에너지", "전자기와 양자"],
+        "otherSubjects": [],
+        "reasons": ["중앙대 전자전기공학부는 수학 심화와 물리 기반 이수가 권장됩니다."]
+      },
+      {
+        "name": "생명과학과",
+        "category": "자연",
+        "coreSubjects": ["미적분Ⅱ", "생명과학", "화학"],
+        "recommendedSubjects": ["세포와 물질대사", "생물의 유전"],
+        "otherSubjects": [],
+        "reasons": ["중앙대 생명과학과는 생명과학·화학과 생명 진로선택 과목 이수가 권장됩니다."]
+      },
+      {
+        "name": "약학부",
+        "category": "의약",
+        "coreSubjects": ["미적분Ⅱ", "기하", "생명과학", "화학"],
+        "recommendedSubjects": ["물질과 에너지", "화학반응의 세계", "세포와 물질대사", "생물의 유전"],
+        "otherSubjects": ["위 과목 중 3과목 이상"],
+        "reasons": ["중앙대 약학부는 수학 심화와 생명·화학 진로선택 과목 이수가 권장됩니다."]
       }
     ]
   },
   {
-    "university": "부산대학교",
+    "university": "경희대",
+    "region": "수도권",
+    "area": "서울",
     "majors": [
       {
         "name": "화학공학과",
+        "category": "공학",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "물리학", "화학", "미적분Ⅱ", "물질과 에너지", "화학 반응의 세계"],
+        "recommendedSubjects": ["기하"],
+        "otherSubjects": ["역학과 에너지", "전자기와 양자"],
+        "reasons": ["경희대 화학공학과는 수학과 화학·물리 심화 과목의 연계 이수가 강조됩니다."]
+      },
+      {
+        "name": "기계공학부",
+        "category": "공학",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "물리학", "화학", "미적분Ⅱ", "기하", "역학과 에너지", "전자기와 양자"],
+        "recommendedSubjects": ["물질과 에너지", "화학 반응의 세계"],
+        "otherSubjects": [],
+        "reasons": ["경희대 기계공학부는 물리·수학 중심의 위계 있는 이수가 권장됩니다."]
+      },
+      {
+        "name": "컴퓨터공학과",
+        "category": "컴퓨터",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "미적분Ⅱ", "기하"],
+        "recommendedSubjects": ["인공지능 수학"],
+        "otherSubjects": [],
+        "reasons": ["경희대 컴퓨터 계열은 수학 중심 이수와 인공지능 수학 연계가 강조됩니다."]
+      },
+      {
+        "name": "수학과",
+        "category": "자연",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "미적분Ⅱ", "기하"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["경희대 수학과는 수학 일반·심화 과목 전반의 이수가 권장됩니다."]
+      },
+      {
+        "name": "물리학과",
+        "category": "자연",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "미적분Ⅱ", "기하", "물리학", "역학과 에너지", "전자기와 양자"],
+        "recommendedSubjects": ["화학", "물질과 에너지"],
+        "otherSubjects": [],
+        "reasons": ["경희대 물리학과는 수학과 물리 심화 과목 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "응용물리학과",
+        "category": "자연",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "미적분Ⅱ", "기하", "물리학", "역학과 에너지", "전자기와 양자"],
+        "recommendedSubjects": ["화학", "물질과 에너지"],
+        "otherSubjects": [],
+        "reasons": ["경희대 응용물리학과는 수학과 물리 진로선택 과목 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "인공지능학과",
+        "category": "컴퓨터",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "미적분Ⅱ", "기하"],
+        "recommendedSubjects": ["인공지능 수학"],
+        "otherSubjects": [],
+        "reasons": ["경희대 인공지능학과는 수학 심화 이수와 인공지능 수학 연계가 중요합니다."]
+      }
+    ]
+  },
+  {
+    "university": "동국대",
+    "region": "수도권",
+    "area": "서울",
+    "majors": [
+      {
+        "name": "국어국문·문예창작학부",
+        "category": "인문",
+        "coreSubjects": ["국어"],
+        "recommendedSubjects": ["역사", "일반사회", "한문"],
+        "otherSubjects": [],
+        "reasons": ["동국대 국어국문·문예창작학부는 국어가 역량 영역, 역사·일반사회·한문이 소양 영역입니다."]
+      },
+      {
+        "name": "영어영문학부",
+        "category": "인문",
+        "coreSubjects": ["국어", "영어"],
+        "recommendedSubjects": ["일반사회", "역사"],
+        "otherSubjects": [],
+        "reasons": ["동국대 영어영문학부는 국어·영어가 역량 영역, 일반사회·역사가 소양 영역입니다."]
+      },
+      {
+        "name": "철학과",
+        "category": "인문",
+        "coreSubjects": ["국어", "윤리"],
+        "recommendedSubjects": ["교양", "한문"],
+        "otherSubjects": [],
+        "reasons": ["동국대 철학과는 국어·윤리가 역량 영역입니다."]
+      },
+      {
+        "name": "사학과",
+        "category": "인문",
+        "coreSubjects": ["국어", "역사"],
+        "recommendedSubjects": ["일반사회", "지리", "윤리", "한문"],
+        "otherSubjects": [],
+        "reasons": ["동국대 사학과는 국어·역사가 역량 영역, 일반사회·지리·윤리·한문이 소양 영역입니다."]
+      },
+      {
+        "name": "정치외교학전공",
+        "category": "사회",
+        "coreSubjects": ["일반사회"],
+        "recommendedSubjects": ["역사", "윤리", "지리"],
+        "otherSubjects": [],
+        "reasons": ["동국대 정치외교학전공은 일반사회가 역량 영역입니다."]
+      },
+      {
+        "name": "행정학전공",
+        "category": "사회",
+        "coreSubjects": ["일반사회"],
+        "recommendedSubjects": ["역사", "윤리", "지리"],
+        "otherSubjects": [],
+        "reasons": ["동국대 행정학전공은 일반사회가 역량 영역입니다."]
+      },
+      {
+        "name": "사회학전공",
+        "category": "사회",
+        "coreSubjects": ["일반사회", "윤리"],
+        "recommendedSubjects": ["역사", "지리"],
+        "otherSubjects": [],
+        "reasons": ["동국대 사회학전공은 일반사회·윤리가 역량 영역, 역사·지리가 소양 영역입니다."]
+      },
+      {
+        "name": "경제학과",
+        "category": "사회",
+        "coreSubjects": ["수학①", "일반사회"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 경제학과는 수학①과 일반사회가 역량 영역입니다."]
+      },
+      {
+        "name": "국제통상학과",
+        "category": "사회",
+        "coreSubjects": ["수학①", "일반사회", "영어"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 국제통상학과는 수학①·일반사회·영어가 역량 영역입니다."]
+      },
+      {
+        "name": "수학과",
+        "category": "자연",
+        "coreSubjects": ["수학②"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 수학과는 수학② 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "통계학과",
+        "category": "자연",
+        "coreSubjects": ["수학②"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 통계학과는 수학② 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "화학과",
+        "category": "자연",
+        "coreSubjects": ["수학②", "물리학", "화학"],
+        "recommendedSubjects": ["생명과학"],
+        "otherSubjects": [],
+        "reasons": ["동국대 화학과는 수학②·물리학·화학이 역량 영역입니다."]
+      },
+      {
+        "name": "생명과학과",
+        "category": "자연",
+        "coreSubjects": ["수학②", "화학", "생명과학"],
+        "recommendedSubjects": ["물리학"],
+        "otherSubjects": [],
+        "reasons": ["동국대 생명과학과는 수학②·화학·생명과학 중심 이수가 안내됩니다."]
+      },
+      {
+        "name": "의생명과학과",
+        "category": "자연",
+        "coreSubjects": ["수학②", "물리학", "화학"],
+        "recommendedSubjects": ["생명과학"],
+        "otherSubjects": [],
+        "reasons": ["동국대 의생명과학과는 수학②·물리학·화학이 역량 영역입니다."]
+      },
+      {
+        "name": "전자전기공학부",
+        "category": "공학",
+        "coreSubjects": ["수학②", "물리학", "화학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 전자전기공학부는 수학②·물리학·화학 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "정보통신공학과",
+        "category": "공학",
+        "coreSubjects": ["수학②", "물리학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 정보통신공학과는 수학②·물리학 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "건설환경공학과",
+        "category": "공학",
+        "coreSubjects": ["수학②", "물리학", "화학"],
+        "recommendedSubjects": ["지구과학"],
+        "otherSubjects": [],
+        "reasons": ["동국대 건설환경공학과는 수학②·물리학·화학이 역량 영역입니다."]
+      },
+      {
+        "name": "화공생물공학과",
+        "category": "공학",
+        "coreSubjects": [],
+        "recommendedSubjects": ["생명과학"],
+        "otherSubjects": [],
+        "reasons": ["동국대 화공생물공학과는 생명과학 소양 영역이 제시됩니다."]
+      },
+      {
+        "name": "기계로봇에너지공학과",
+        "category": "공학",
+        "coreSubjects": ["수학②", "물리학", "화학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 기계로봇에너지공학과는 수학②와 물리학·화학 중심 이수가 안내됩니다."]
+      },
+      {
+        "name": "산업시스템공학과",
+        "category": "공학",
+        "coreSubjects": ["수학②"],
+        "recommendedSubjects": ["물리학"],
+        "otherSubjects": [],
+        "reasons": ["동국대 산업시스템공학과는 수학②가 역량 영역, 물리학이 소양 영역입니다."]
+      },
+      {
+        "name": "에너지신소재공학과",
+        "category": "공학",
+        "coreSubjects": ["수학②", "물리학", "화학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 에너지신소재공학과는 수학②·물리학·화학 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "컴퓨터·AI학부",
+        "category": "컴퓨터",
+        "coreSubjects": ["수학②"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 컴퓨터·AI학부는 수학 중심 이수가 안내됩니다."]
+      },
+      {
+        "name": "시스템반도체학부",
+        "category": "공학",
+        "coreSubjects": ["수학②", "물리학", "화학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 시스템반도체학부는 수학②·물리학·화학 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "의료인공지능공학과",
+        "category": "컴퓨터",
+        "coreSubjects": ["수학②", "물리학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 의료인공지능공학과는 수학②·물리학 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "지능형네트워크융합학과",
+        "category": "컴퓨터",
+        "coreSubjects": ["수학②", "물리학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["동국대 지능형네트워크융합학과는 수학②·물리학 중심 이수가 권장됩니다."]
+      }
+    ]
+  },
+  {
+    "university": "건국대",
+    "region": "수도권",
+    "area": "서울",
+    "majors": [
+      {
+        "name": "문과대학",
+        "category": "인문",
+        "coreSubjects": ["국어", "영어", "사회"],
+        "recommendedSubjects": [],
+        "otherSubjects": ["일반 선택 과목 먼저 이수 후 진로 선택·융합 선택 과목 이수 추천"],
+        "reasons": ["건국대 문과대학은 국어·영어·사회 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "사범대학",
+        "category": "교육",
+        "coreSubjects": ["국어", "영어", "사회"],
+        "recommendedSubjects": [],
+        "otherSubjects": ["일반 선택 과목 먼저 이수 후 진로 선택·융합 선택 과목 이수 추천"],
+        "reasons": ["건국대 사범대학은 국어·영어·사회 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "사회과학대학",
+        "category": "사회",
+        "coreSubjects": ["국어", "사회", "수학(대수, 미적분Ⅰ, 확률과 통계)"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["건국대 사회과학대학은 국어·사회·수학 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "이과대학",
+        "category": "자연",
+        "coreSubjects": ["수학(대수, 미적분Ⅰ, 미적분Ⅱ, 확률과 통계)", "과학"],
+        "recommendedSubjects": [],
+        "otherSubjects": ["과학은 일반 선택 과목 먼저 이수 후, 진로와 적성에 맞게 진로 선택 과목 이수 추천"],
+        "reasons": ["건국대 이과대학은 수학·과학 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "건축대학",
+        "category": "공학",
+        "coreSubjects": ["수학(대수, 미적분Ⅰ, 미적분Ⅱ, 확률과 통계)", "과학"],
+        "recommendedSubjects": [],
+        "otherSubjects": ["과학은 일반 선택 과목 먼저 이수 후, 진로와 적성에 맞게 진로 선택 과목 이수 추천"],
+        "reasons": ["건국대 건축대학은 수학·과학 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "융합과학기술원",
+        "category": "자연",
+        "coreSubjects": ["수학(대수, 미적분Ⅰ, 미적분Ⅱ, 확률과 통계)", "과학"],
+        "recommendedSubjects": [],
+        "otherSubjects": ["과학은 일반 선택 과목 먼저 이수 후, 진로와 적성에 맞게 진로 선택 과목 이수 추천"],
+        "reasons": ["건국대 융합과학기술원은 수학·과학 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "생명과학대학",
+        "category": "자연",
+        "coreSubjects": ["수학(대수, 미적분Ⅰ, 미적분Ⅱ, 확률과 통계)", "과학"],
+        "recommendedSubjects": [],
+        "otherSubjects": ["과학은 일반 선택 과목 먼저 이수 후, 진로와 적성에 맞게 진로 선택 과목 이수 추천"],
+        "reasons": ["건국대 생명과학대학은 수학·과학 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "수의과대학",
+        "category": "의약",
+        "coreSubjects": ["수학(대수, 미적분Ⅰ, 미적분Ⅱ, 확률과 통계)", "과학"],
+        "recommendedSubjects": [],
+        "otherSubjects": ["과학은 일반 선택 과목 먼저 이수 후, 진로와 적성에 맞게 진로 선택 과목 이수 추천"],
+        "reasons": ["건국대 수의과대학은 수학·과학 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "공과대학",
+        "category": "공학",
+        "coreSubjects": ["수학(대수, 미적분Ⅰ, 미적분Ⅱ, 기하)", "과학(물리학)"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["건국대 공과대학은 미적분·기하와 물리학 중심 이수를 권장합니다."]
+      },
+      {
+        "name": "컴퓨터공학과",
+        "category": "컴퓨터",
+        "coreSubjects": ["수학(대수, 미적분Ⅰ, 미적분Ⅱ, 확률과 통계)", "과학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["건국대 컴퓨터공학 계열은 수학·과학 중심 이수 흐름이 중요합니다."]
+      }
+    ]
+  },
+  {
+    "university": "경북대",
+    "region": "영남권",
+    "area": "경북",
+    "majors": [
+      {
+        "name": "독어독문학과",
+        "category": "인문",
+        "coreSubjects": ["제2외국어/한문 관련 교과(군)"],
+        "recommendedSubjects": ["1과목 이상"],
+        "otherSubjects": [],
+        "reasons": ["경북대 인문대학은 어문 계열 중심으로 제2외국어/한문 이수를 권장합니다."]
+      },
+      {
+        "name": "인문대학",
+        "category": "인문",
+        "coreSubjects": ["전공 관련 일반 선택 과목"],
+        "recommendedSubjects": ["제2외국어/한문 관련 과목"],
+        "otherSubjects": [],
+        "reasons": ["경북대 인문계열은 전공 적합한 인문 교과 중심 이수가 필요합니다."]
+      },
+      {
+        "name": "사회과학대학",
+        "category": "사회",
+        "coreSubjects": ["국어", "사회", "수학"],
+        "recommendedSubjects": [],
+        "otherSubjects": [],
+        "reasons": ["경북대 사회계열은 국어·사회·수학 중심 이수가 유리합니다."]
+      },
+      {
+        "name": "국어교육과",
+        "category": "교육",
+        "coreSubjects": [],
+        "recommendedSubjects": [],
+        "otherSubjects": ["세부 과목 정보 추가 입력 필요"],
+        "reasons": ["경북대 국어교육과는 자료에 포함되어 있으며 현재 기본 골격 단계입니다."]
+      },
+      {
+        "name": "생명과학과",
+        "category": "자연",
+        "coreSubjects": [],
+        "recommendedSubjects": [],
+        "otherSubjects": ["세부 과목 정보 추가 입력 필요"],
+        "reasons": ["경북대 생명과학과는 자료에 포함되어 있으며 현재 기본 골격 단계입니다."]
+      },
+      {
+        "name": "물리학과",
+        "category": "자연",
+        "coreSubjects": [],
+        "recommendedSubjects": [],
+        "otherSubjects": ["세부 과목 정보 추가 입력 필요"],
+        "reasons": ["경북대 물리학과는 자료에 포함되어 있으며 현재 기본 골격 단계입니다."]
+      },
+      {
+        "name": "화학과",
+        "category": "자연",
+        "coreSubjects": [],
+        "recommendedSubjects": [],
+        "otherSubjects": ["세부 과목 정보 추가 입력 필요"],
+        "reasons": ["경북대 화학과는 자료에 포함되어 있으며 현재 기본 골격 단계입니다."]
+      },
+      {
+        "name": "기계공학과",
+        "category": "공학",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "미적분Ⅱ", "기하", "물리학", "화학", "전자기와 양자", "역학과 에너지", "물질과 에너지"],
+        "recommendedSubjects": ["3과목 이상 이수 권장"],
+        "otherSubjects": [],
+        "reasons": ["경북대 공과계열은 수학·과학 관련 과목 3과목 이상 이수를 권장합니다."]
+      },
+      {
+        "name": "과학기술대학",
+        "category": "자연",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "물리학", "화학"],
+        "recommendedSubjects": ["미적분Ⅱ", "기하", "인공지능 수학", "역학과 에너지", "전자기와 양자", "물질과 에너지", "화학 반응의 세계"],
+        "otherSubjects": [],
+        "reasons": ["경북대 과학기술대학은 수학·물리·화학과 진로선택 심화 이수가 권장됩니다."]
+      },
+      {
+        "name": "생태환경대학",
+        "category": "자연",
+        "coreSubjects": ["대수", "미적분Ⅰ", "확률과 통계", "생명과학", "화학"],
+        "recommendedSubjects": ["세포와 물질대사", "생물의 유전"],
+        "otherSubjects": ["2과목 이상(위계에 맞게)"],
+        "reasons": ["경북대 생태환경대학은 생명과학·화학 중심 이수가 권장됩니다."]
+      }
+    ]
+  },
+  {
+    "university": "부산대",
+    "region": "영남권",
+    "area": "부산",
+    "majors": [
+      {
+        "name": "화학공학과",
+        "category": "공학",
         "coreSubjects": ["화학"],
         "recommendedSubjects": ["물리학"],
         "otherSubjects": [],
-        "reasons": ["부산대 화학공학과는 화학 중심 이수가 중요합니다."]
+        "reasons": ["부산대 화학공학과는 화학이 핵심, 물리학이 권장 과목입니다."]
+      },
+      {
+        "name": "기계공학과",
+        "category": "공학",
+        "coreSubjects": ["물리학"],
+        "recommendedSubjects": ["화학", "생명과학"],
+        "otherSubjects": [],
+        "reasons": ["부산대 기계공학과는 물리학 중심 이수와 추가 과학 과목 이수가 도움이 됩니다."]
+      },
+      {
+        "name": "고분자공학과",
+        "category": "공학",
+        "coreSubjects": ["화학"],
+        "recommendedSubjects": ["물리학"],
+        "otherSubjects": [],
+        "reasons": ["부산대 고분자공학과는 화학이 핵심, 물리학이 권장 과목입니다."]
+      },
+      {
+        "name": "신소재공학과",
+        "category": "공학",
+        "coreSubjects": ["화학"],
+        "recommendedSubjects": ["물리학"],
+        "otherSubjects": [],
+        "reasons": ["부산대 신소재공학과는 화학이 핵심, 물리학이 권장 과목입니다."]
+      },
+      {
+        "name": "이차전지융합학과",
+        "category": "공학",
+        "coreSubjects": ["화학"],
+        "recommendedSubjects": ["물리학"],
+        "otherSubjects": [],
+        "reasons": ["부산대 이차전지융합학과는 화학이 핵심, 물리학이 권장 과목입니다."]
+      },
+      {
+        "name": "환경공학과",
+        "category": "공학",
+        "coreSubjects": ["화학"],
+        "recommendedSubjects": ["생명과학"],
+        "otherSubjects": [],
+        "reasons": ["부산대 환경공학과는 화학이 핵심, 생명과학이 권장 과목입니다."]
+      },
+      {
+        "name": "경제학부",
+        "category": "사회",
+        "coreSubjects": ["확률과 통계", "미적분Ⅰ", "미적분Ⅱ"],
+        "recommendedSubjects": ["제시 과목 중 1과목 이상 이수"],
+        "otherSubjects": [],
+        "reasons": ["부산대 경제학부는 확률과 통계·미적분 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "경영학과",
+        "category": "사회",
+        "coreSubjects": ["확률과 통계", "미적분Ⅰ", "미적분Ⅱ"],
+        "recommendedSubjects": ["제시 과목 중 1과목 이상 이수"],
+        "otherSubjects": [],
+        "reasons": ["부산대 경영학과는 수학 과목 중 1과목 이상 이수가 권장됩니다."]
+      },
+      {
+        "name": "수학과",
+        "category": "자연",
+        "coreSubjects": ["확률과 통계", "기하", "미적분Ⅱ"],
+        "recommendedSubjects": ["제시 과목 중 1과목 이상 이수"],
+        "otherSubjects": [],
+        "reasons": ["부산대 수학과는 확률과 통계·기하·미적분Ⅱ 중심 이수가 권장됩니다."]
+      },
+      {
+        "name": "통계학과",
+        "category": "자연",
+        "coreSubjects": ["확률과 통계", "기하", "미적분Ⅱ"],
+        "recommendedSubjects": ["제시 과목 중 1과목 이상 이수"],
+        "otherSubjects": [],
+        "reasons": ["부산대 통계학과는 확률과 통계·기하·미적분Ⅱ 중심 이수가 권장됩니다."]
       }
     ]
   }
